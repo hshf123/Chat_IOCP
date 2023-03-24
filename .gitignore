@@ -1,0 +1,7 @@
+﻿.vs
+Binary
+CSDummyClient/bin
+CSDummyClient/obj
+DummyClient/x64
+Server/x64
+ServerCore/x64

@@ -1,0 +1,60 @@
+syntax = "proto3";
+package Protocol;
+
+import "google/protobuf/timestamp.proto";
+option csharp_namespace = "Google.Protobuf.Protocol";
+
+import "Enum.proto";
+import "Struct.proto";
+
+message C_LOGIN
+{
+	string name = 1;
+}
+
+message S_LOGIN
+{
+	bool success = 1;
+	bool isNewId = 2;
+	Player player = 3;
+	repeated RoomInfo roomInfos = 4;
+}
+
+message C_ENTER_GAME
+{
+	uint32 roomId = 1;
+}
+
+message S_ENTER_GAME
+{
+	bool success = 1;
+	RoomInfo roomInfo = 2;
+	repeated RoomInfo roomInfos = 3;
+}
+
+message C_LEAVE_GAME
+{
+
+}
+
+message S_LEAVE_GAME
+{
+	repeated RoomInfo roomInfos = 1;
+}
+
+message S_ROOM_UPDATE
+{
+	RoomInfo roomInfo = 1;
+}
+
+message C_CHAT
+{
+	string msg = 1;
+}
+
+message S_CHAT
+{
+	RoomInfo roomInfo = 1;
+	Player player = 2;
+	string msg = 3;
+}
