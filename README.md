@@ -9,6 +9,16 @@ C++ IOCP 서버로 간단한 채팅 프로그램을 만들었습니다.<br><br>
 
 이 프로젝트는 Visual Studio 2022환경에서 제작 되었습니다.<br><br>
 코드를 내려받고 빌드 후 실행하면 됩니다.<br><br>
+
+1. Tools/PacketGenerator/MakeExe.bat 실행<br><br>
+2. Templates폴더와 GenPackets.exe 파일을 복사 -> Common/Protobuf/bin으로 복사 (Templates폴더가 있다면 덮어쓰기)<br><br>
+3. GenPackets.bat 실행<br><br>
+4. Visual Studio실행 후 솔루션 빌드<br><br>
+5. 솔루션 속성에서 여러 개의 프로젝트 시작으로 설정 후, CSDummyClient, DummyClient, Server를 시작으로 설정 후 시작<br><br>
+CSDummyClient는 C# 클라이언트, DummyClient는 C++ 클라이언트 입니다.<br><br>
+
+## 실행 예제
+
 실행하면 다음과 같은 문구가 등장합니다.<br><br>
 ![image](https://user-images.githubusercontent.com/66163506/227478553-e075325f-066d-458d-842a-ebf2c6f78b76.png)<br>
 이름을 입력하면 서버에서 DB를 확인하고 처음 등장한 이름이라면 새롭게 계정을 생성합니다.<br><br>
