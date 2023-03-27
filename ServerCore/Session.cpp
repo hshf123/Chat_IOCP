@@ -16,11 +16,21 @@ Session::~Session()
 
 void Session::Send(SendBufferRef buffer)
 {
-	WRITE_LOCK;
+	if (IsConnected() == false)
+		return;
 
-	_sendQueue.push(buffer);
+	bool registerSend = false;
 
-	if (_sendRegistered.exchange(true) == false)
+	{
+		WRITE_LOCK;
+
+		_sendQueue.push(buffer);
+
+		if (_sendRegistered.exchange(true) == false)
+			registerSend = true;
+	}
+
+	if (registerSend)
 		RegisterSend();
 }
 
@@ -213,8 +223,15 @@ void Session::ProcessSend(int32 numOfBytes)
 		return;
 	}
 
-	_sendRegistered.store(false);
 	OnSend(numOfBytes);
+
+	{
+		WRITE_LOCK;
+		if (_sendQueue.empty() == false)
+			RegisterSend();
+		else
+			_sendRegistered.store(false);
+	}
 }
 
 void Session::HandleError(int32 errorCode)
